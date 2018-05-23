@@ -1,6 +1,6 @@
 {
   "name": "menreiki",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "description": "ssr with react",
   "main": "lib/index.js",
   "scripts": {
@@ -46,14 +46,15 @@
     "@babel/cli": "^7.0.0-beta.47",
     "lint-staged": "^7.1.0",
     "pre-commit": "^1.2.2",
-    "rimraf": "^2.6.2"
-  },
-  "dependencies": {
+    "rimraf": "^2.6.2",
     "eslint": "^4.19.1",
     "eslint-config-airbnb": "^16.1.0",
     "eslint-plugin-import": "^2.11.0",
     "eslint-plugin-jsx-a11y": "^6.0.3",
     "eslint-plugin-react": "^7.8.2",
+    "babel-eslint": "8.2.1"
+  },
+  "dependencies": {
     "@babel/core": "^7.0.0-beta.47",
     "@babel/plugin-transform-react-constant-elements": "^7.0.0-beta.47",
     "@babel/plugin-transform-react-inline-elements": "^7.0.0-beta.47",
@@ -62,7 +63,6 @@
     "@babel/preset-react": "^7.0.0-beta.47",
     "@babel/preset-stage-0": "^7.0.0-beta.47",
     "autoprefixer": "^8.2.0",
-    "babel-eslint": "8.2.1",
     "babel-loader": "^8.0.0-beta.2",
     "babel-merge": "^1.1.1",
     "babel-plugin-transform-flow-interface-imports": "^1.0.1",
