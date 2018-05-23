@@ -1,6 +1,6 @@
 {
   "name": "menreiki",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "ssr with react",
   "main": "lib/index.js",
   "scripts": {
@@ -12,7 +12,9 @@
     "bin",
     "commands",
     "lib",
-    "webpack"
+    "webpack",
+    "react",
+    "router"
   ],
   "repository": {
     "type": "git",
