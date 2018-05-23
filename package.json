@@ -5,7 +5,7 @@
   "main": "lib/index.js",
   "scripts": {
     "lint": "eslint ./lib/**.{js,jsx} ./commands/**.js",
-    "prepublish": "lint",
+    "prepublish": "npm run lint",
     "lint-staged": "lint-staged"
   },
   "files": [
