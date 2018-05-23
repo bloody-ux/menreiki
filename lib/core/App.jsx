@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { LazyRouteLoader } from '../core';
+import LazyRouteLoader from '../core/LazyRouteLoader';
 import routes from './routes';
 
 class App extends Component {
