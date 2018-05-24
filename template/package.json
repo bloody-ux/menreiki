@@ -1,0 +1,35 @@
+{
+  "name": "${name}",
+  "version": "${version}",
+  "scripts": {
+    "start": "menreiki dev",
+    "build": "menreiki build",
+    "debug": "node --nolazy --inspect-brk=9229 ./node_modules/.bin/menreiki dev",
+    "lint-staged": "lint-staged",
+    "lint": "eslint ./src/**"
+  },
+  "author": "${author}",
+  "license": "${liscence}",
+  "description": "${description}",
+  "pre-commit": [
+    "lint-staged"
+  ],
+  "lint-staged": {
+    "src/**/*.{js,jsx}": [
+      "eslint"
+    ]
+  },
+  "devDependencies": {
+    "babel-eslint": "8.2.1",
+    "eslint": "^4.19.1",
+    "eslint-config-airbnb": "^16.1.0",
+    "eslint-plugin-import": "^2.11.0",
+    "eslint-plugin-jsx-a11y": "^6.0.3",
+    "eslint-plugin-react": "^7.8.2",
+    "lint-staged": "^7.1.0",
+    "pre-commit": "^1.2.2"
+  },
+  "dependencies": {
+    "menreiki": "^${menreiki}"
+  }
+}

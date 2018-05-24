@@ -2,6 +2,7 @@
 const program = require('commander');
 const dev = require('../commands/dev');
 const build = require('../commands/build');
+const init = require('../commands/init');
 
 program
   .version('0.1.1')
@@ -18,6 +19,11 @@ program
   .description('`menreiki build` to build assets to dist')
   .option('-v --verbose', 'print detailed log to console')
   .action(build);
+
+program
+  .command('init')
+  .description('`menreiki init` to create a project')
+  .action(init);
 
 program
   .parse(process.argv);
