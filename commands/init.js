@@ -85,6 +85,8 @@ module.exports = function() {
       return true;
     });
 
+    console.log();
+    console.log(colors.magenta('generated project skeleton, start to install packages'));
     try {
       childProcess.spawnSync('tnpm', ['install'], {
         stdio: 'inherit',
@@ -96,7 +98,8 @@ module.exports = function() {
     }
 
     // done
-    console.log(colors.magenta('done, please run `npm start` to start'));
+    console.log();
+    console.log(colors.magenta('all done, please run `npm start` to start'));
     process.exit(0);
   }).catch((ex) => {
     console.error(ex);

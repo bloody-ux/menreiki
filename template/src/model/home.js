@@ -2,7 +2,7 @@
  * Model for Home Page
  */
 
- import { getTitle } from '../services/test';
+import { getTitle } from '../services/test';
 
 export default {
   namespace: 'home',
