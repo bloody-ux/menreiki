@@ -10,7 +10,7 @@ export default function DefaultLayout({ children }) {
       <NavLink to="/about">About</NavLink>
       <NavLink to="/oldpage">Old Page</NavLink>
       <NavLink to="/notfound">Not Found</NavLink>
-      <br />s
+      <br />
       {children}
     </div>
   );
