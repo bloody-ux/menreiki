@@ -6,8 +6,13 @@ import StaticRouter from 'react-router-dom/StaticRouter';
 import serialize from 'serialize-javascript';
 import { flushChunkNames } from 'react-universal-component/server';
 import flushChunks from 'webpack-flush-chunks';
+import colors from 'colors';
 import App from './App';
 import config from './config';
+
+function logKV(key, value) {
+  console.log(colors.magenta(key), value);
+}
 
 export function getRequestPath(req) {
   return req.path || req._parsedUrl.pathname;
@@ -64,10 +69,11 @@ export function httpHandler(req, res, app, webpackResult, pageName) {
     before: ['manifest'],
   });
 
-  console.log('PATH', req.url);
-  console.log('DYNAMIC CHUNK NAMES RENDERED', chunkNames);
-  console.log('SCRIPTS SERVED', scripts);
-  console.log('STYLESHEETS SERVED', stylesheets);
+  console.log();
+  logKV('PATH: ', colors.green(req.url));
+  logKV('  DYNAMIC CHUNK NAMES RENDERED:   ', chunkNames);
+  logKV('  SCRIPTS SERVED:                 ', scripts);
+  logKV('  STYLESHEETS SERVED:             ', stylesheets);
 
   return res.end(config.template({
     pageName,
