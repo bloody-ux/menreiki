@@ -1,7 +1,6 @@
 const path = require('path');
 const webpack = require('webpack');
 const ExtractTextPlugin = require('extract-css-chunks-webpack-plugin');
-const ParallelUglifyPlugin = require('webpack-parallel-uglify-plugin');
 const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 const fs = require('fs');
 const merge = require('babel-merge');
@@ -23,6 +22,7 @@ const browserConfig = {
   resolve: {
     extensions: ['.js', '.jsx'],
   },
+  devtool: 'source-map',
   module: {
     rules: [
       {
@@ -62,7 +62,14 @@ const browserConfig = {
       filename: '[name].css',
     }),
     new OptimizeCssAssetsPlugin({
-      cssProcessorOptions: { discardComments: { removeAll: true } },
+      cssProcessorOptions: {
+        discardComments: {
+          removeAll: true,
+        },
+        map: {
+          inline: false,
+        },
+      },
     }),
     new webpack.optimize.CommonsChunkPlugin({ // 解决模块加载顺序问题引入的
       name: 'manifest',
@@ -75,8 +82,20 @@ const browserConfig = {
       deepChildren: true,
     }),
     new webpack.NoEmitOnErrorsPlugin(), // 出错时不产生（emit）assets
-    new ParallelUglifyPlugin({
-      uglifyJS: {},
+    new webpack.optimize.UglifyJsPlugin({
+      compress: {
+        screw_ie8: true,
+        warnings: false,
+      },
+      mangle: {
+        screw_ie8: true,
+      },
+      output: {
+        screw_ie8: true,
+        comments: false,
+      },
+      parallel: true,
+      sourceMap: true,
     }),
     new webpack.HashedModuleIdsPlugin(),
   ],
@@ -102,6 +121,7 @@ const serverConfig = {
     filename: 'index.js',
     libraryTarget: 'commonjs2',
   },
+  devtool: 'source-map',
   resolve: {
     extensions: ['.js', '.jsx'],
   },

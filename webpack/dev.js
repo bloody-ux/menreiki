@@ -22,7 +22,7 @@ const browserConfig = {
     chunkFilename: '[name].js',
     publicPath: '/',
   },
-  devtool: 'sourcemap',
+  devtool: 'source-map',
   resolve: {
     extensions: ['.js', '.jsx'],
   },
@@ -105,7 +105,7 @@ const serverConfig = {
     filename: 'index.js',
     libraryTarget: 'commonjs2',
   },
-  devtool: 'sourcemap',
+  devtool: 'source-map',
   resolve: {
     extensions: ['.js', '.jsx'],
   },
