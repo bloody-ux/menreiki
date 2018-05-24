@@ -20,7 +20,7 @@ const browserConfig = {
     path: path.resolve(cwd, './dist/client'),
     filename: '[name].js',
     chunkFilename: '[name].js',
-    publicPath: '/static/',
+    publicPath: '/',
   },
   devtool: 'sourcemap',
   resolve: {

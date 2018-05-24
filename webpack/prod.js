@@ -13,11 +13,12 @@ const menreikiConfigPath = path.join(cwd, 'menreiki.config.js');
 
 const browserConfig = {
   name: 'client',
-  entry: path.join(__dirname, './lib/browser/index.jsx'),
+  entry: path.join(__dirname, '../lib/browser/index.jsx'),
   output: {
     path: path.resolve(cwd, './dist/client'),
     filename: '[name].js',
     chunkFilename: '[name].js',
+    publicPath: '/',
   },
   resolve: {
     extensions: ['.js', '.jsx'],
@@ -28,6 +29,19 @@ const browserConfig = {
         test: /\.jsx?$/,
         loader: 'babel-loader',
         exclude: /node_modules/,
+        options: merge({
+          plugins: [ // 以下优化性能的插件请不要在dev模式下开启，否则会使得react-hot-loader报错（虽然工作）
+            '@babel/transform-react-constant-elements',
+            '@babel/transform-react-inline-elements',
+          ],
+        }, babelConfig),
+      },
+      {
+        test: /\.jsx?$/,
+        loader: 'babel-loader',
+        include: [
+          path.resolve(__dirname, '../lib'),
+        ],
         options: merge({
           plugins: [ // 以下优化性能的插件请不要在dev模式下开启，否则会使得react-hot-loader报错（虽然工作）
             '@babel/transform-react-constant-elements',
@@ -80,7 +94,7 @@ const externals = fs
 
 const serverConfig = {
   name: 'server',
-  entry: path.join(__dirname, './lib/server/serverRender.js'),
+  entry: path.join(__dirname, '../lib/server/serverRender.js'),
   target: 'node',
   externals,
   output: {
@@ -97,6 +111,20 @@ const serverConfig = {
         test: /\.jsx?$/,
         loader: 'babel-loader',
         exclude: /node_modules/,
+        options: merge({
+          plugins: [
+            'transform-node-env-inline',
+            '@babel/transform-react-constant-elements',
+            '@babel/transform-react-inline-elements',
+          ],
+        }, babelConfig),
+      },
+      {
+        test: /\.jsx?$/,
+        loader: 'babel-loader',
+        include: [
+          path.resolve(__dirname, '../lib'),
+        ],
         options: merge({
           plugins: [
             'transform-node-env-inline',
