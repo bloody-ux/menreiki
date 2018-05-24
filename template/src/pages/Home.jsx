@@ -1,6 +1,6 @@
 import React from 'menreiki/react';
 import { Link } from 'menreiki/router';
-import { PropTypes, async } from 'menreiki';
+import { PropTypes, async, connect } from 'menreiki';
 import HomeModel from '../model/home';
 
 const Async = async(import('../components/Async'));
@@ -40,4 +40,10 @@ Home.init = function({ store }) {
   });
 };
 
-export default Home;
+function mapStateToProps({ home }) {
+  return {
+    title: home.title,
+  };
+}
+
+export default connect(mapStateToProps)(Home);

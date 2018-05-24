@@ -1,6 +1,9 @@
 /**
  * Model for Home Page
  */
+
+ import { getTitle } from '../services/test';
+
 export default {
   namespace: 'home',
   state: {
@@ -9,20 +12,14 @@ export default {
   effects: {
     * getTitle(_, { put }) {
       // simulate async operation
-      const title = yield new Promise(((resolve) => {
-        setTimeout(() => {
-          resolve('hello world');
-        }, 200);
-      }));
+      const { data } = yield getTitle();
 
       yield put({
         type: 'setter',
         payload: {
-          title,
+          title: data.title,
         },
       });
-
-      return title;
     },
   },
   reducers: {
