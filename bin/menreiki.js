@@ -3,9 +3,10 @@ const program = require('commander');
 const dev = require('../commands/dev');
 const build = require('../commands/build');
 const init = require('../commands/init');
+const pkg = require('../package.json');
 
 program
-  .version('0.1.1')
+  .version(pkg.version)
   .usage('[command] [options]');
 
 program
