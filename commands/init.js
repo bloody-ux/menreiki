@@ -81,10 +81,11 @@ module.exports = function() {
       }
 
       const realPath = filepath.replace(sourcePath, '');
-      console.log(`generated ${path.join(targetPath, realPath)}`);
+      console.log(colors.magenta('generated: '), `${path.join(targetPath, realPath)}`);
       return true;
     });
 
+    // start to install deps and devDeps
     console.log();
     console.log(colors.magenta('generated project skeleton, start to install packages'));
     try {
