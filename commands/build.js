@@ -2,7 +2,7 @@ const path = require('path');
 const util = require('./util');
 
 module.exports = function(cmd) {
-  process.env.NODE_ENV = 'development';
+  process.env.NODE_ENV = 'production';
   const webpackConfig = require('../webpack/prod');
   const webpackCmd = require('../lib/server/webpack');
 
