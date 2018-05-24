@@ -74,6 +74,7 @@ export function httpHandler(req, res, app, webpackResult, pageName) {
   logKV('  DYNAMIC CHUNK NAMES RENDERED:   ', chunkNames);
   logKV('  SCRIPTS SERVED:                 ', scripts);
   logKV('  STYLESHEETS SERVED:             ', stylesheets);
+  console.log();
 
   return res.end(config.template({
     pageName,
