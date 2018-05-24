@@ -96,7 +96,7 @@ module.exports = function() {
     }
 
     // done
-    console.log('done');
+    console.log(colors.magenta('done, please run `npm start` to start'));
     process.exit(0);
   }).catch(() => {
     process.exit(-1);
