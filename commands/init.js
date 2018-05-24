@@ -7,6 +7,7 @@ const editJsonFile = require('edit-json-file');
 const pkg = require('../package.json');
 const copyDir = require('copy-dir');
 const fs = require('fs');
+const childProcess = require('child_process');
 
 function isOK(text) {
   if (text === '') return true;
@@ -68,10 +69,12 @@ module.exports = function() {
       process.exit(0);
     }
 
+    // copy pkg to target path
     const targetPkgPath = path.join(targetPath, 'package.json');
     fs.writeFileSync(targetPkgPath, JSON.stringify(file.get(), null, 2));
     console.log(`generated ${targetPkgPath}`);
 
+    // copy other file to target path
     copyDir.sync(sourcePath, targetPath, (stat, filepath, filename) => {
       if (stat === 'file' && filename === 'package.json') {
         return false;
@@ -82,6 +85,17 @@ module.exports = function() {
       return true;
     });
 
+    try {
+      childProcess.spawnSync('tnpm', ['install'], {
+        stdio: 'inherit',
+      });
+    } catch (ex) {
+      childProcess.spawnSync('npm', ['install'], {
+        stdio: 'inherit',
+      });
+    }
+
+    // done
     console.log('done');
     process.exit(0);
   }).catch(() => {

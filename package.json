@@ -1,6 +1,6 @@
 {
   "name": "menreiki",
-  "version": "0.0.10",
+  "version": "0.0.11",
   "description": "ssr with react",
   "main": "lib/index.js",
   "scripts": {
@@ -21,7 +21,7 @@
     "url": "https://github.com/bloody-ux/menreiki.git"
   },
   "engines": {
-    "node": "6.14.2"
+    "node": ">= 6.14.2"
   },
   "bin": {
     "menreiki": "./bin/menreiki.js"
