@@ -9,6 +9,7 @@ import 'nprogress/nprogress.css';
 import NProgress from 'nprogress';
 import { getApp } from './client';
 import { getFinalizedRoutes, updateStore, getPageName } from './common';
+import config from './config';
 
 class LazyRouteLoader extends Component {
   static propTypes = {
@@ -35,7 +36,7 @@ class LazyRouteLoader extends Component {
     // if ssr, server already fill the scripts and with initalState
     if (app.ssr) return;
 
-    this.load(this.props);
+    this.load(this.props, null);
   }
 
   async componentWillReceiveProps(nextProps) {
@@ -46,7 +47,7 @@ class LazyRouteLoader extends Component {
       previousLocation: this.props.location,
     });
 
-    await this.load(nextProps);
+    await this.load(nextProps, this.props);
 
     this.setState({
       previousLocation: null,
@@ -54,7 +55,7 @@ class LazyRouteLoader extends Component {
   }
 
 
-  async load(props) {
+  async load(props, prevProps) {
     NProgress.start();
 
     const path = props.location.pathname;
@@ -67,6 +68,11 @@ class LazyRouteLoader extends Component {
       NProgress.set(0.8); // set to 80% after dispatching action
 
       this.tryUpdatedPageMeta(finalizedRoutes);
+
+      // added custom route change handler
+      if (config.routeChanged && typeof config.routeChanged === 'function') {
+        await config.routeChanged(finalizedRoutes, props, prevProps);
+      }
     } catch (ex) {
       hasError = true;
       console.error(ex);
@@ -87,7 +93,14 @@ class LazyRouteLoader extends Component {
       document.querySelector('head').appendChild(pageNameMeta);
     }
 
+    let title = document.querySelector('title');
+    if (!title) {
+      title = document.createElement('title');
+      document.querySelector('head').appendChild(title);
+    }
+
     pageNameMeta.content = getPageName(finalizedRoutes);
+    title.textContent = pageNameMeta.content;
   }
 
   render() {
