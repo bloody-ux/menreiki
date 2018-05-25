@@ -42,7 +42,9 @@ const browserConfig = {
       {
         test: /\.jsx?$/,
         loader: 'babel-loader',
-        include: /\/menreiki\/lib/,
+        include: [
+          path.resolve(__dirname, '../lib'),
+        ],
         options: merge({
           cacheDirectory: true,
           plugins: [
@@ -120,7 +122,9 @@ const serverConfig = {
       {
         test: /\.jsx?$/,
         loader: 'babel-loader',
-        include: /\/menreiki\/lib/,
+        include: [
+          path.resolve(__dirname, '../lib'),
+        ],
         options: merge(babelConfig, {
 
         }),

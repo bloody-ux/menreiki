@@ -39,7 +39,9 @@ const browserConfig = {
       {
         test: /\.jsx?$/,
         loader: 'babel-loader',
-        include: /\/menreiki\/lib/,
+        include: [
+          path.resolve(__dirname, '../lib'),
+        ],
         options: merge({
           plugins: [ // 以下优化性能的插件请不要在dev模式下开启，否则会使得react-hot-loader报错（虽然工作）
             '@babel/transform-react-constant-elements',
@@ -140,7 +142,9 @@ const serverConfig = {
       {
         test: /\.jsx?$/,
         loader: 'babel-loader',
-        include: /\/menreiki\/lib/,
+        include: [
+          path.resolve(__dirname, '../lib'),
+        ],
         options: merge({
           plugins: [
             'transform-node-env-inline',
