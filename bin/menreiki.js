@@ -47,5 +47,7 @@ program
   .option('-v --verbose', 'print detailed log to console')
   .action(build);
 
+console.log(colors.green(`${pkg.name}:  ${pkg.version}`));
+
 program
   .parse(process.argv);
