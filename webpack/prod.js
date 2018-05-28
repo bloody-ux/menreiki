@@ -12,6 +12,7 @@ const menreikiConfig = require(menreikiConfigPath);
 const routesPath = path.resolve(cwd, menreikiConfig.routesPath || './src/routes');
 
 module.exports = function() {
+  const browserBabel = babel.browser();
   let browserConfig = {
     name: 'client',
     entry: path.join(__dirname, '../lib/browser/index.jsx'),
@@ -31,7 +32,7 @@ module.exports = function() {
           test: /\.jsx?$/,
           loader: 'babel-loader',
           exclude: /node_modules/,
-          options: babel.browser(),
+          options: browserBabel,
         },
         {
           test: /\.jsx?$/,
@@ -39,7 +40,7 @@ module.exports = function() {
           include: [
             path.resolve(__dirname, '../lib'),
           ],
-          options: babel.browser(),
+          options: browserBabel,
         },
       ].concat(common.getCommonLoader()),
     },
@@ -98,6 +99,7 @@ module.exports = function() {
     browserConfig = menreikiConfig.webpack(browserConfig) || browserConfig;
   }
 
+  const serverBabel = babel.server();
   // 除了filter中的module，其他module都作为外部module加载
   const externals = fs
     .readdirSync(path.resolve(cwd, 'node_modules'))
@@ -127,7 +129,7 @@ module.exports = function() {
           test: /\.jsx?$/,
           loader: 'babel-loader',
           exclude: /node_modules/,
-          options: babel.server(),
+          options: serverBabel,
         },
         {
           test: /\.jsx?$/,
@@ -135,7 +137,7 @@ module.exports = function() {
           include: [
             path.resolve(__dirname, '../lib'),
           ],
-          options: babel.server(),
+          options: serverBabel,
         },
         {
           test: /\.(css|less)$/,
