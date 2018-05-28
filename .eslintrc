@@ -4,7 +4,8 @@
   "globals": {
     "document": false,
     "window": false,
-    "MENREIKICONFIG": false
+    "MENREIKICONFIG": false,
+    "ROUTESPATH": false
   },
   "rules": {
     "max-len": ["error", { "ignoreComments": true, "ignoreStrings": true, "ignoreUrls": true, "ignoreRegExpLiterals": true, "ignoreTemplateLiterals": true }],

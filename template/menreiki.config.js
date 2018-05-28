@@ -1,8 +1,32 @@
-export routes from './src/routes';
+// commonjs module
 
-export const hostElement = '#app';
+// routes path for the applicaiton
+exports.routesPath = './src/routes';
 
-export const template = function({
+// react app root, should be a css id selector
+exports.hostElement = '#app';
+
+// babel config for client side
+exports.babel = function(babelConfig) {
+  return babelConfig;
+};
+
+// babel config for server side
+exports.babelServer = function(babelConfig) {
+  return babelConfig;
+};
+
+// webpack config for client side
+exports.webpack = function(webpackConfig) {
+  return webpackConfig;
+};
+
+// webpack config for server side
+exports.webpackServer = function(webpackConfig) {
+  return webpackConfig;
+};
+
+exports.template = function({
   pageName,
   styles,
   cssHash,
@@ -17,6 +41,8 @@ export const template = function({
       <head>
         <meta charset="UTF-8">
         <meta name="pagename" content="${pageName}">
+        <link rel="icon" href="https://zos.alipayobjects.com/rmsportal/nDgBIDOgapQuIrT.ico" type="image/x-icon" />
+        <link rel="shortcut icon" href="https://zos.alipayobjects.com/rmsportal/nDgBIDOgapQuIrT.ico" type="image/x-icon" />
         <title>${pageName}</title>
         ${styles}
         <script>window.__INITIAL_DATA__ = ${initalState}</script>
