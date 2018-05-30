@@ -4,13 +4,12 @@ import BrowserRouter from 'react-router-dom/BrowserRouter';
 import { Provider } from 'react-redux';
 import { bootstrap } from '../core/client';
 import App from '../core/App';
-import config from '../core/config';
 
 bootstrap()
   .then((store) => {
-    const $hostElement = document.querySelector(config.hostElement);
+    const $hostElement = document.querySelector('#app');
     if (!$hostElement) {
-      return console.error(`${config.hostElment} doesn't exist on DOM, please check \`menreiki.config.js > hostElement\``);
+      return console.error('#app doesn\'t exist on DOM');
     }
 
     return hydrate(

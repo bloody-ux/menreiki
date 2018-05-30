@@ -27,14 +27,6 @@ export function createApp(onError) {
   return app;
 }
 
-export function updateOrigin(req) {
-  // for server side rendering, relative url doesn't work
-  // added setup to concat orgin with url
-  if (!config.origin) {
-    config.origin = `${req.protocol}://${req.headers.host}`;
-  }
-}
-
 export function httpHandler(req, res, app, webpackResult, pageName) {
   const context = {
     __INITIAL_DATA__: {
@@ -82,7 +74,7 @@ export function httpHandler(req, res, app, webpackResult, pageName) {
     cssHash,
     js,
     initalState: serialize(context.__INITIAL_DATA__),
-    elementId: config.hostElement.substr(1),
+    elementId: 'app',
     markup,
   }));
 }

@@ -9,7 +9,6 @@ import 'nprogress/nprogress.css';
 import NProgress from 'nprogress';
 import { getApp } from './client';
 import { getFinalizedRoutes, updateStore, getPageName } from './common';
-import config from './config';
 
 class LazyRouteLoader extends Component {
   static propTypes = {
@@ -55,7 +54,7 @@ class LazyRouteLoader extends Component {
   }
 
 
-  async load(props, prevProps) {
+  async load(props /* , prevProps */) {
     NProgress.start();
 
     const path = props.location.pathname;
@@ -68,11 +67,6 @@ class LazyRouteLoader extends Component {
       NProgress.set(0.8); // set to 80% after dispatching action
 
       this.tryUpdatedPageMeta(finalizedRoutes);
-
-      // added custom route change handler
-      if (config.routeChanged && typeof config.routeChanged === 'function') {
-        await config.routeChanged(finalizedRoutes, props, prevProps);
-      }
     } catch (ex) {
       hasError = true;
       console.error(ex);

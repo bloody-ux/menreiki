@@ -15,6 +15,9 @@ add more docs
 
 // commonjs module
 
+// whether mock server is enabled
+exports.proxy = undefined;
+
 // routes path for the applicaiton
 exports.routesPath = './src/routes';
 
