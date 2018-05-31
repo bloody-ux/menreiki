@@ -18,12 +18,6 @@ add more docs
 // whether mock server is enabled
 exports.proxy = undefined;
 
-// routes path for the applicaiton
-exports.routesPath = './src/routes';
-
-// react app root, should be a css id selector
-exports.hostElement = '#app';
-
 // babel config for client side
 exports.babel = function(babelConfig) {
   return babelConfig;
