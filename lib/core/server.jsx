@@ -72,6 +72,7 @@ export function httpHandler(req, res, app, webpackResult, pageName) {
     pageName,
     styles,
     cssHash,
+    url: req.url,
     js,
     initalState: serialize(context.__INITIAL_DATA__),
     elementId: 'app',
