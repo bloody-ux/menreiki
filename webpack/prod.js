@@ -49,7 +49,6 @@ module.exports = function() {
         'process.env': {
           NODE_ENV: JSON.stringify('production'),
         },
-        MENREIKICONFIG: JSON.stringify(menreikiConfigPath),
         ROUTESPATH: JSON.stringify(routesPath),
       }),
       new ExtractTextPlugin({ // 支持对assets chunk的split
@@ -146,6 +145,17 @@ module.exports = function() {
               loader: 'css-loader/locals',
             },
           ],
+        },
+        {
+          test: /\.json$/,
+          loader: 'json-loader',
+        },
+        {
+          test: /\.html?$/,
+          loader: 'file-loader',
+          options: {
+            name: '[name].[ext]',
+          },
         },
       ],
     },
