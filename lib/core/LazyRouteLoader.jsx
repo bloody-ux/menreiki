@@ -23,7 +23,7 @@ class LazyRouteLoader extends Component {
     location: PropTypes.shape({
       pathname: PropTypes.string,
     }).isRequired,
-    ErrorView: PropTypes.node.isRequired,
+    ErrorView: PropTypes.func.isRequired,
   }
 
   state = {
