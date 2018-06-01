@@ -4,7 +4,8 @@ import PropTypes from 'prop-types';
 export default function DefaultErrorView({ error }) {
   return (
     <div>
-      Error happened:
+      <h1>Oops</h1>
+      <p>Error happened:</p>
       <p>{error.message}</p>
       <code>{error.stack}</code>
     </div>
