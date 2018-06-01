@@ -23,11 +23,12 @@ class LazyRouteLoader extends Component {
     location: PropTypes.shape({
       pathname: PropTypes.string,
     }).isRequired,
+    ErrorView: PropTypes.node.isRequired,
   }
 
   state = {
     previousLocation: null,
-    hasError: false,
+    error: null,
   }
 
   componentDidMount() {
@@ -54,11 +55,12 @@ class LazyRouteLoader extends Component {
   }
 
 
-  async load(props /* , prevProps */) {
+  async load(props, prevProps) {
     NProgress.start();
 
     const path = props.location.pathname;
-    let hasError = false;
+    const onRouteChanged = props.routeChanged;
+    let error = null;
 
     try {
       const finalizedRoutes = await getFinalizedRoutes(props.routes, path);
@@ -67,15 +69,17 @@ class LazyRouteLoader extends Component {
       NProgress.set(0.8); // set to 80% after dispatching action
 
       this.tryUpdatedPageMeta(finalizedRoutes);
+
+      await onRouteChanged(finalizedRoutes, props, prevProps);
     } catch (ex) {
-      hasError = true;
+      error = ex;
       console.error(ex);
     }
 
     NProgress.done();
 
     this.setState({
-      hasError,
+      error,
     });
   }
 
@@ -98,11 +102,10 @@ class LazyRouteLoader extends Component {
   }
 
   render() {
-    const { location, routes } = this.props;
-    const { previousLocation, hasError } = this.state;
+    const { location, routes, ErrorView } = this.props;
+    const { previousLocation, error } = this.state;
 
-    // TODO: enhance error page
-    if (hasError) return <p>出错了</p>;
+    if (error) return <ErrorView error={error} />;
 
     return (
       <Route
