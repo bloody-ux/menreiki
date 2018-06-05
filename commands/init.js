@@ -26,8 +26,7 @@ module.exports = function() {
 
   co(function* () {
     console.log(
-      colors.green('This utility will walk you through creating the skeleton of a menreiki project.\nThe inputs are used to generate common items in package.json.\n'),
-    );
+      colors.green('This utility will walk you through creating the skeleton of a menreiki project.\nThe inputs are used to generate common items in package.json.\n'));
 
     const defaultStyle = text => colors.bold(text).cyan;
     // name
