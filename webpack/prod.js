@@ -11,7 +11,7 @@ const menreikiConfigPath = path.join(cwd, 'menreiki.config.js');
 const menreikiConfig = require(menreikiConfigPath);
 const routesPath = path.resolve(cwd, menreikiConfig.routesPath || './src/routes');
 
-module.exports = function() {
+module.exports = function(args) {
   const browserBabel = babel.browser();
   let browserConfig = {
     name: 'client',
@@ -20,7 +20,7 @@ module.exports = function() {
       path: path.resolve(cwd, './dist/client'),
       filename: '[name].js',
       chunkFilename: '[name].js',
-      publicPath: '/',
+      publicPath: args.cdn ? undefined : '/',
     },
     resolve: {
       extensions: ['.js', '.jsx'],
