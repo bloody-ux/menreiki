@@ -45,7 +45,6 @@ program
   .command('build')
   .description('`menreiki build` to build assets to dist, preferred to run with npm-script')
   .option('-v --verbose', 'print detailed log to console')
-  .option('-c --cdn', 'whether enable cdn and remove `publicPath` in webpack.config')
   .action(build);
 
 console.log(colors.green(`${pkg.name}:  ${pkg.version}`));

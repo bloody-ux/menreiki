@@ -11,6 +11,5 @@ module.exports = function(cmd) {
 
   webpackCmd.build(webpackConfig, {
     verbose: !!cmd.verbose,
-    cdn: !!cmd.cdn,
   });
 };
