@@ -1,4 +1,4 @@
-import { fetch, normalizeUrl } from 'menreiki';
+import { fetch } from 'menreiki';
 
 function processError(err) {
   if (err) {
@@ -29,8 +29,8 @@ function processResponse(res) {
  * @param {string} url target url
  * @param {object} options fetch options
  */
-export function get(url, options) {
-  return fetch(normalizeUrl(url), {
+export function get(url, options = {}) {
+  return fetch(options.req)(url, {
     method: 'GET',
     credentials: 'include',
     mode: 'cors',
@@ -46,14 +46,15 @@ export function get(url, options) {
  * @param {object} data data to post in body
  * @param {object} options fetch options
  */
-export function post(url, data, options) {
-  return fetch(normalizeUrl(url), {
-    body: JSON.stringify(data),
+export function post(url, data = {}, options) {
+  const { req, ...restParams } = data;
+  return fetch(req)(url, {
+    body: JSON.stringify(restParams),
     method: 'POST',
     credentials: 'include',
     mode: 'cors',
     headers: {
-      'content-type': 'application/json',
+      'Content-Type': 'application/json',
     },
     ...options,
   })
@@ -66,7 +67,7 @@ export function post(url, data, options) {
  * @param {object} options fetch options
  */
 export function getResource(url, options) {
-  return get(normalizeUrl(url), {
+  return get(url, {
     ...options,
     credentials: 'omit',
   });

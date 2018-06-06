@@ -1,4 +1,4 @@
 import { get } from '../common/fetch';
 
 const getTitleUrl = '/title.json';
-export const getTitle = () => get(getTitleUrl);
+export const getTitle = data => get(getTitleUrl, data);

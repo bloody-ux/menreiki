@@ -10,9 +10,11 @@ export default {
     title: '',
   },
   effects: {
-    * getTitle(_, { put }) {
+    * getTitle({ payload }, { put }) {
       // simulate async operation
-      const { data } = yield getTitle();
+      const { data } = yield getTitle({
+        ...payload,
+      });
 
       yield put({
         type: 'setter',

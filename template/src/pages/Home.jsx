@@ -33,10 +33,13 @@ Home.preInit = function({ app }) {
 };
 
 // called after preInit
-Home.init = function({ store }) {
+Home.init = function({ store, req }) {
   // always return a promise, or else ssr won't work correctly
   return store.dispatch({
     type: 'home/getTitle',
+    payload: {
+      req,
+    }
   });
 };
 
