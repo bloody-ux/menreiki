@@ -2,7 +2,7 @@
   "name": "menreiki",
   "version": "0.0.37",
   "description": "ssr with react",
-  "main": "lib/index.js",
+  "main": "lib/core/index.js",
   "scripts": {
     "lint": "eslint ./lib/**.{js,jsx} ./commands/**.js",
     "prepare": "npm run lint",
