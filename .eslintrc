@@ -5,7 +5,8 @@
     "document": false,
     "window": false,
     "MENREIKICONFIG": false,
-    "ROUTESPATH": false
+    "ROUTESPATH": false,
+    "SSR": false
   },
   "rules": {
     "max-len": ["error", { "ignoreComments": true, "ignoreStrings": true, "ignoreUrls": true, "ignoreRegExpLiterals": true, "ignoreTemplateLiterals": true }],

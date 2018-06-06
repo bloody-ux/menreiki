@@ -18,6 +18,9 @@ add more docs
 // whether mock server is enabled
 exports.proxy = undefined;
 
+// whether enabled server side rendering
+exports.ssr = true;
+
 // babel config for client side
 exports.babel = function(babelConfig) {
   return babelConfig;

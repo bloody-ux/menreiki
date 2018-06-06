@@ -27,7 +27,7 @@ export function createApp(onError) {
   return app;
 }
 
-export function httpHandler(req, res, app, webpackResult, pageName) {
+export function ssrHandler(req, res, app, webpackResult, pageName) {
   const context = {
     __INITIAL_DATA__: {
       data: app._store.getState(),
@@ -77,5 +77,28 @@ export function httpHandler(req, res, app, webpackResult, pageName) {
     initalState: serialize(context.__INITIAL_DATA__),
     elementId: 'app',
     markup,
+  }));
+}
+
+export function httpHandler(req, res, app, webpackResult, pageName) {
+  const chunkNames = flushChunkNames();
+  const {
+    js,
+    styles,
+    cssHash,
+  } = flushChunks(webpackResult.clientStats, {
+    chunkNames,
+    before: ['manifest'],
+  });
+
+  return res.end(config.template({
+    pageName,
+    styles,
+    cssHash,
+    url: req.url,
+    js,
+    initalState: '""',
+    elementId: 'app',
+    markup: '',
   }));
 }

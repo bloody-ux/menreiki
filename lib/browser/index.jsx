@@ -1,5 +1,5 @@
 import React from 'react';
-import { hydrate } from 'react-dom';
+import { hydrate, render } from 'react-dom';
 import BrowserRouter from 'react-router-dom/BrowserRouter';
 import { Provider } from 'react-redux';
 import { bootstrap } from '../core/client';
@@ -12,7 +12,7 @@ bootstrap()
       return console.error('#app doesn\'t exist on DOM');
     }
 
-    return hydrate(
+    return (SSR ? hydrate : render)(
       <Provider store={store}>
         <BrowserRouter>
           <App />

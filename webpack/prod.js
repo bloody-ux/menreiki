@@ -50,6 +50,7 @@ module.exports = function() {
           NODE_ENV: JSON.stringify('production'),
         },
         ROUTESPATH: JSON.stringify(routesPath),
+        SSR: menreikiConfig.ssr !== false
       }),
       new ExtractTextPlugin({ // 支持对assets chunk的split
         filename: '[name].css',
@@ -166,6 +167,7 @@ module.exports = function() {
         },
         MENREIKICONFIG: JSON.stringify(menreikiConfigPath),
         ROUTESPATH: JSON.stringify(routesPath),
+        SSR: menreikiConfig.ssr !== false
       }),
       new webpack.optimize.LimitChunkCountPlugin({
         maxChunks: 1,
