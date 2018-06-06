@@ -1,74 +1,66 @@
-import { fetch } from 'menreiki';
-
-function processError(err) {
-  if (err) {
-    return Promise.reject(err);
-  }
-
-  const error = new Error('Unkonw Error');
-  error.success = false;
-  return Promise.reject(error);
-}
-
-function processResponse(res) {
-  // 如果不是404/500什么的
-  if (res.ok) {
-    return res.json().then(v => ({
-      ...v,
-      success: v.stat === 'ok',
-      message: v.msg,
-    }));
-  }
-
-  console.log(res);
-  return processError(new Error(res.statusText));
-}
+import { fetch, parseUrl } from 'menreiki';
 
 /**
- * get resource with credential
- * @param {string} url target url
- * @param {object} options fetch options
+ * base request api
+ * @param {String} url target url
+ * @param {Object} options fetch options
  */
-export function get(url, options = {}) {
-  return fetch(options.req)(url, {
+export function request(url, options = {}) {
+  function processError(err) {
+    console.error(err);
+    return Promise.reject(err || new Error('unkown error'));
+  }
+
+  function processResponse(res) {
+    if (res.ok) {
+      return res;
+    }
+
+    console.log(res);
+    return Promise.reject(new Error(res.statusText));
+  }
+
+  return fetch(url, options)
+    .then(processResponse)
+    .then(res => res.json())
+    .catch(processError);
+}
+
+export function get(url, data = {}) {
+  const { req, ...rest } = data;
+  const parsedUrl = parseUrl(url);
+  Object.keys(rest).forEach((key) => {
+    parsedUrl.set(key, rest[key]);
+  });
+
+  url = parsedUrl.toString();
+
+  return request(url, {
     method: 'GET',
     credentials: 'include',
     mode: 'cors',
     cache: 'no-cache', // 禁用缓存
-    ...options,
-  })
-    .then(processResponse, processError);
+    req,
+  });
 }
 
-/**
- * post resource with credential
- * @param {string} url target url
- * @param {object} data data to post in body
- * @param {object} options fetch options
- */
-export function post(url, data = {}, options) {
-  const { req, ...restParams } = data;
-  return fetch(req)(url, {
-    body: JSON.stringify(restParams),
+export function post(url, data = {}) {
+  const { req, ...rest } = data;
+
+  return request(url, {
+    body: JSON.stringify(rest),
     method: 'POST',
     credentials: 'include',
     mode: 'cors',
     headers: {
       'Content-Type': 'application/json',
     },
-    ...options,
-  })
-    .then(processResponse, processError);
+    req,
+  });
 }
 
-/**
- * get resource without credential
- * @param {string} url target url to visit
- * @param {object} options fetch options
- */
-export function getResource(url, options) {
-  return fetch.raw(url, {
-    ...options,
+export function getResource(url) {
+  return request(url, {
     credentials: 'omit',
   });
 }

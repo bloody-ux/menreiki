@@ -1,6 +1,6 @@
 {
   "name": "menreiki",
-  "version": "0.0.43",
+  "version": "0.0.44",
   "description": "ssr with react",
   "main": "lib/core/index.js",
   "scripts": {
@@ -112,6 +112,7 @@
     "serialize-javascript": "^1.4.0",
     "serve-favicon": "^2.5.0",
     "url-loader": "^1.0.1",
+    "url-parse": "^1.4.1",
     "warning": "^3.0.0",
     "watch": "^1.0.2",
     "webpack": "^3.10.0",
