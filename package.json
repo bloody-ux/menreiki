@@ -1,6 +1,6 @@
 {
   "name": "menreiki",
-  "version": "0.0.41",
+  "version": "0.0.42",
   "description": "ssr with react",
   "main": "lib/core/index.js",
   "scripts": {
