@@ -30,6 +30,7 @@
     "function-paren-newline": [0],
     "object-curly-newline": [0],
     "import/no-dynamic-require": [0],
-    "global-require": [0]
+    "global-require": [0],
+    "comma-dangle": [0]
   }
 }

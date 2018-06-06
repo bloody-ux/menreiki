@@ -88,6 +88,7 @@
     "extract-css-chunks-webpack-plugin": "^2.0.18",
     "file-loader": "^1.1.11",
     "hoist-non-react-statics": "^2.5.0",
+    "http-proxy": "^1.17.0",
     "invariant": "^2.2.4",
     "isomorphic-fetch": "^2.2.1",
     "json-loader": "^0.5.7",
