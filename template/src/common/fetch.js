@@ -67,7 +67,7 @@ export function post(url, data = {}, options) {
  * @param {object} options fetch options
  */
 export function getResource(url, options) {
-  return get(url, {
+  return fetch.raw(url, {
     ...options,
     credentials: 'omit',
   });
