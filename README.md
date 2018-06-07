@@ -21,6 +21,10 @@ exports.proxy = undefined;
 // whether enabled server side rendering
 exports.ssr = true;
 
+
+// dev server host, default: localhost
+exports.host = 'localhost'
+
 // babel config for client side
 exports.babel = function(babelConfig) {
   return babelConfig;
