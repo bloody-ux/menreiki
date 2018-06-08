@@ -54,6 +54,11 @@ class LazyRouteLoader extends Component {
     });
   }
 
+  componentDidCatch(error) {
+    this.setState({
+      error,
+    });
+  }
 
   async load(props, prevProps) {
     NProgress.start();
@@ -78,9 +83,12 @@ class LazyRouteLoader extends Component {
 
     NProgress.done();
 
-    this.setState({
-      error,
-    });
+    // to remove useless update
+    if (this.state.error !== error) {
+      this.setState({
+        error,
+      });
+    }
   }
 
   tryUpdatedPageMeta(finalizedRoutes) {
