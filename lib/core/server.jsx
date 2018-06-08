@@ -14,6 +14,23 @@ function logKV(key, value) {
   console.log(colors.magenta(key), value);
 }
 
+function monkeyPatchModel(app) {
+  // monkey patch model method for client after dva.start()
+  // when started, model method will change to injectModel
+  const oldModel = app.model;
+  app.model = function(m) {
+    const models = app._models;
+    const { length } = models;
+    for (let i = 0; i < length; i++) {
+      if (models[i].namespace === m.namespace) {
+        return models[i];
+      }
+    }
+
+    return oldModel.call(app, m);
+  };
+}
+
 export function getRequestPath(req) {
   return req.path || req._parsedUrl.pathname;
 }
@@ -23,6 +40,7 @@ export function createApp(onError) {
     onError,
   });
   app.start();
+  monkeyPatchModel(app);
 
   return app;
 }
