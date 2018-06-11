@@ -29,9 +29,7 @@ export function request(url, options = {}) {
 export function get(url, data = {}) {
   const { req, ...rest } = data;
   const parsedUrl = parseUrl(url);
-  Object.keys(rest).forEach((key) => {
-    parsedUrl.set(key, rest[key]);
-  });
+  parsedUrl.set('query', data);
 
   url = parsedUrl.toString();
 

@@ -1,6 +1,6 @@
 {
   "name": "menreiki",
-  "version": "0.0.49",
+  "version": "0.0.50",
   "description": "ssr with react",
   "main": "lib/core/index.js",
   "scripts": {
@@ -66,6 +66,13 @@
     "@babel/preset-env": "^7.0.0-beta.47",
     "@babel/preset-react": "^7.0.0-beta.47",
     "@babel/preset-stage-0": "^7.0.0-beta.47",
+    "@types/invariant": "^2.2.29",
+    "@types/prop-types": "^15.5.3",
+    "@types/react": "^16.3.17",
+    "@types/react-router-config": "^1.0.7",
+    "@types/react-router-dom": "^4.2.7",
+    "@types/url-parse": "^1.1.0",
+    "@types/warning": "^3.0.0",
     "autoprefixer": "^8.2.0",
     "babel-loader": "^8.0.0-beta.2",
     "babel-merge": "^1.1.1",
