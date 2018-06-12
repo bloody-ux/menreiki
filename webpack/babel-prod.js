@@ -9,8 +9,6 @@ const menreikiConfig = require(menreikiConfigPath);
 exports.browser = function() {
   let config = merge({
     plugins: [ // only enable below plugins in prod
-      'transform-react-constant-elements',
-      'transform-react-inline-elements',
       /*
       '@babel/transform-react-constant-elements',
       '@babel/transform-react-inline-elements',
@@ -29,8 +27,6 @@ exports.server = function() {
   let config = merge({
     plugins: [
       'transform-node-env-inline',
-      'transform-react-constant-elements',
-      'transform-react-inline-elements',
       /*
       '@babel/transform-react-constant-elements',
       '@babel/transform-react-inline-elements',
