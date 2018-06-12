@@ -9,6 +9,7 @@ import flushChunks from 'webpack-flush-chunks';
 import colors from 'colors';
 import App from './App';
 import config from './config';
+import createLoading from './dva-loading';
 
 function logKV(key, value) {
   console.log(colors.magenta(key), value);
@@ -39,6 +40,8 @@ export function createApp(onError) {
   const app = create({
     onError,
   });
+
+  app.use(createLoading());
   app.start();
   monkeyPatchModel(app);
 
