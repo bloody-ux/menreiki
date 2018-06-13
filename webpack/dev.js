@@ -46,7 +46,7 @@ module.exports = function() {
           options: browserBabel,
         },
         {
-          test: /\/(components|pages|layout)\/.*\.jsx?$/,
+          test: /\/(components|pages|layout)\/.*\.jsx$/, // only enabled for jsx
           exclude: /node_modules/,
           loader: 'react-hot-loader-loader',
         },
