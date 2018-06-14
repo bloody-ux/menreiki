@@ -10,8 +10,8 @@ import NProgress from 'nprogress';
 import { getApp } from './client';
 import { getFinalizedRoutes, updateStore, getPageName } from './common';
 
-function isRedirectMatch(pathname) {
-  const matchedRoutes = matchRoutes(pathname);
+function isRedirectMatch(routes, pathname) {
+  const matchedRoutes = matchRoutes(routes, pathname);
   if (matchedRoutes && matchedRoutes.length > 0) {
     const lastRoute = matchedRoutes[matchedRoutes.length - 1];
 
@@ -64,7 +64,7 @@ class LazyRouteLoader extends Component {
     if (!navigated) return;
 
     // if current match is a redirect component
-    if (isRedirectMatch(nextProps.location.pathname)) return;
+    if (isRedirectMatch(nextProps.routes, nextProps.location.pathname)) return;
 
     this.setState({
       previousLocation: this.props.location,
