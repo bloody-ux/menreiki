@@ -1,18 +1,31 @@
-import React from 'react';
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { Redirect } from 'react-router-dom';
 
 export default function redirect({ to, push, exact, strict, from }) {
-  const RedirectWrapper = () => (
-    <Redirect
-      from={from}
-      to={to}
-      push={push}
-      exact={exact}
-      strict={strict}
-    />
-  );
+  return class RedirectWrapper extends Component {
+    static displayName = `redirect(${from || ''}) => ${to}`
 
-  RedirectWrapper.displayName = `redirect(${from || ''}) => ${to}`;
+    static propTypes = {
+      location: PropTypes.shape({
+      }).isRequired,
+    }
 
-  return RedirectWrapper;
+    shouldComponentUpdate(nextProps) {
+      // fixed redirect will update when lazyroute dispatching an action in previous location
+      return nextProps.location !== this.props.location;
+    }
+
+    render() {
+      return (
+        <Redirect
+          from={from}
+          to={to}
+          push={push}
+          exact={exact}
+          strict={strict}
+        />
+      );
+    }
+  };
 }
