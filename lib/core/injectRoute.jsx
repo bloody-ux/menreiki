@@ -9,7 +9,7 @@ import { getComponentName } from './common';
  * A public higher-order component to convert renderRoutes call to children prop
  */
 const injectRoute = (Component) => {
-  const C = (props) => {
+  const InjectRouteWrapper = (props) => {
     const { wrappedComponentRef, route, ...remainingProps } = props;
 
     return (
@@ -23,21 +23,21 @@ const injectRoute = (Component) => {
     );
   };
 
-  C.displayName = `injectRoute(${getComponentName(Component)})`;
-  C.WrappedComponent = Component;
-  C.propTypes = {
+  InjectRouteWrapper.displayName = `injectRoute(${getComponentName(Component)})`;
+  InjectRouteWrapper.WrappedComponent = Component;
+  InjectRouteWrapper.propTypes = {
     wrappedComponentRef: PropTypes.func,
     route: PropTypes.shape({
       routes: PropTypes.array,
     }),
   };
 
-  C.defaultProps = {
+  InjectRouteWrapper.defaultProps = {
     wrappedComponentRef: undefined,
     route: undefined,
   };
 
-  return hoistStatics(C, Component);
+  return hoistStatics(InjectRouteWrapper, Component);
 };
 
 export default injectRoute;

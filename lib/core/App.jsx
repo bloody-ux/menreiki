@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import LazyRouteLoader from '../core/LazyRouteLoader';
-import routes, { ErrorView, routeChanged } from './routes';
+import routes, { ErrorView, onRouteChanged, onError } from './routes';
 
 class App extends Component {
   state = {
@@ -10,7 +10,8 @@ class App extends Component {
       <LazyRouteLoader
         routes={routes}
         ErrorView={ErrorView}
-        routeChanged={routeChanged}
+        onRouteChanged={onRouteChanged}
+        onError={onError}
       />
     );
   }

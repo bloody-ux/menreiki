@@ -4,6 +4,8 @@ import { Redirect } from 'react-router-dom';
 
 export default function redirect({ to, push, exact, strict, from }) {
   return class RedirectWrapper extends Component {
+    static isRedirectWrapper = true
+
     static displayName = `redirect(${from || ''}) => ${to}`
 
     static propTypes = {

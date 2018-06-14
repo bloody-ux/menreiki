@@ -3,12 +3,30 @@
  */
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { renderRoutes } from 'react-router-config';
+import { renderRoutes, matchRoutes } from 'react-router-config';
 import { withRouter, Route } from 'react-router-dom';
 import 'nprogress/nprogress.css';
 import NProgress from 'nprogress';
 import { getApp } from './client';
 import { getFinalizedRoutes, updateStore, getPageName } from './common';
+
+function isRedirectMatch(pathname) {
+  const matchedRoutes = matchRoutes(pathname);
+  if (matchedRoutes && matchedRoutes.length > 0) {
+    const lastRoute = matchedRoutes[matchedRoutes.length - 1];
+
+    let { component } = lastRoute.route;
+    while (component) {
+      if (component.isRedirectWrapper) {
+        return true;
+      }
+
+      component = component.WrappedComponent;
+    }
+  }
+
+  return false;
+}
 
 class LazyRouteLoader extends Component {
   static propTypes = {
@@ -24,6 +42,8 @@ class LazyRouteLoader extends Component {
       pathname: PropTypes.string,
     }).isRequired,
     ErrorView: PropTypes.func.isRequired,
+    // onError: PropTypes.func.isRequired,
+    // onRouteChanged: PropTypes.func.isRequired,
   }
 
   state = {
@@ -42,6 +62,9 @@ class LazyRouteLoader extends Component {
   async componentWillReceiveProps(nextProps) {
     const navigated = nextProps.location !== this.props.location;
     if (!navigated) return;
+
+    // if current match is a redirect component
+    if (isRedirectMatch(nextProps.location.pathname)) return;
 
     this.setState({
       previousLocation: this.props.location,
@@ -64,11 +87,12 @@ class LazyRouteLoader extends Component {
     NProgress.start();
 
     const path = props.location.pathname;
-    const onRouteChanged = props.routeChanged;
+    const { onRouteChanged } = props;
     let error = null;
+    let finalizedRoutes = null;
 
     try {
-      const finalizedRoutes = await getFinalizedRoutes(props.routes, path);
+      finalizedRoutes = await getFinalizedRoutes(props.routes, path);
       NProgress.set(0.4); // set to 40% after loading codebase
       await updateStore(finalizedRoutes, getApp());
       NProgress.set(0.8); // set to 80% after dispatching action
@@ -77,8 +101,13 @@ class LazyRouteLoader extends Component {
 
       await onRouteChanged(finalizedRoutes, props, prevProps);
     } catch (ex) {
-      error = ex;
-      console.error(ex);
+      const { onError } = props;
+      const result = onError(error, finalizedRoutes, props, prevProps);
+      // if onError returns false, means prevent default error handling
+      if (result !== false) {
+        error = ex;
+        console.error(ex);
+      }
     }
 
     NProgress.done();
