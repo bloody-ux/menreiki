@@ -10,8 +10,11 @@ import NProgress from 'nprogress';
 import { getApp } from './client';
 import { getFinalizedRoutes, updateStore, getPageName } from './common';
 
-function isRedirectMatch(routes, pathname) {
-  const matchedRoutes = matchRoutes(routes, pathname);
+function getMatchedRoutes(routes, pathname) {
+  return matchRoutes(routes, pathname);
+}
+
+function isRedirectMatch(matchedRoutes) {
   if (matchedRoutes && matchedRoutes.length > 0) {
     const lastRoute = matchedRoutes[matchedRoutes.length - 1];
 
@@ -56,21 +59,25 @@ class LazyRouteLoader extends Component {
     // if ssr, server already fill the scripts and with initalState
     if (app.ssr) return;
 
-    this.load(this.props, null);
+    const matchedRoutes =
+      getMatchedRoutes(this.props.routes, this.props.location.pathname);
+    this.load(this.props, null, matchedRoutes);
   }
 
   async componentWillReceiveProps(nextProps) {
     const navigated = nextProps.location !== this.props.location;
     if (!navigated) return;
 
+    const matchedRoutes =
+      getMatchedRoutes(nextProps.routes, nextProps.location.pathname);
     // if current match is a redirect component
-    if (isRedirectMatch(nextProps.routes, nextProps.location.pathname)) return;
+    if (isRedirectMatch(matchedRoutes)) return;
 
     this.setState({
       previousLocation: this.props.location,
     });
 
-    await this.load(nextProps, this.props);
+    await this.load(nextProps, this.props, matchedRoutes);
 
     this.setState({
       previousLocation: null,
@@ -83,7 +90,7 @@ class LazyRouteLoader extends Component {
     });
   }
 
-  async load(props, prevProps) {
+  async load(props, prevProps, matchedRoutes) {
     NProgress.start();
 
     const path = props.location.pathname;
@@ -92,12 +99,12 @@ class LazyRouteLoader extends Component {
     let finalizedRoutes = null;
 
     try {
+      this.tryUpdatedPageMeta(matchedRoutes);
+
       finalizedRoutes = await getFinalizedRoutes(props.routes, path);
       NProgress.set(0.4); // set to 40% after loading codebase
       await updateStore(finalizedRoutes, getApp());
       NProgress.set(0.8); // set to 80% after dispatching action
-
-      this.tryUpdatedPageMeta(finalizedRoutes);
 
       await onRouteChanged(finalizedRoutes, props, prevProps);
     } catch (ex) {
@@ -120,7 +127,7 @@ class LazyRouteLoader extends Component {
     }
   }
 
-  tryUpdatedPageMeta(finalizedRoutes) {
+  tryUpdatedPageMeta(matchedRoutes) {
     let pageNameMeta = document.querySelector('meta[name=pagename]');
     if (!pageNameMeta) {
       pageNameMeta = document.createElement('meta');
@@ -134,7 +141,7 @@ class LazyRouteLoader extends Component {
       document.querySelector('head').appendChild(title);
     }
 
-    pageNameMeta.content = getPageName(finalizedRoutes);
+    pageNameMeta.content = getPageName(matchedRoutes);
     title.textContent = pageNameMeta.content;
   }
 
