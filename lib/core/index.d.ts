@@ -1,6 +1,6 @@
-import { matchRoutes } from 'react-router-config';
+import { matchRoutes, MatchedRoute } from 'react-router-config';
 import routes from './routes';
-import { Route } from 'react-router-dom';
+import { getMetaFromMatchedRoutes } from './common';
 
 /**
  * util to load async component
@@ -32,11 +32,10 @@ export function getMatchedRoutes(path: string) {
 
 /**
  * get metadata from routes, search from leaf to root
- * @param {string} path current path, can use router's location.pathname, or match.url
+ * @param {Array<MatchedRoute>} matchedRoutes current matched routes array
  * @param {(route: Route) => any} filter filter function to get meta
  */
-export function getMatchedRoutesMeta(path: string, filter: (route: Route) => any) {
-  const matchedRoutes = getMatchedRoutes(path);
+export function getMatchedRoutesMeta(matchedRoutes: Array<MatchedRoute>, filter: (route: MatchedRoute) => any) {
   return getMetaFromMatchedRoutes(matchedRoutes, filter);
 }
 
