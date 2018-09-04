@@ -1,77 +1,25 @@
-## how to use 
+## 准备工作
+
+由于项目依赖于`lerna`，因此请先执行以下命令。[lerna文档直通车](https://lernajs.io)
+``` bash
+  npm install lerna -g
+```
+
+## 开发
 
 ``` bash
-npm install -g menreiki
-menreiki init
+npm install
+npm run install-deps
 ```
 
-## todo
+## 发布
 
-add more docs
-
-## default menreiki.config.js
-
-``` javascript
-
-// commonjs module
-
-// whether mock server is enabled
-exports.proxy = undefined;
-
-// whether enabled server side rendering
-exports.ssr = true;
-
-
-// dev server host, default: localhost
-exports.host = 'localhost'
-
-// babel config for client side
-exports.babel = function(babelConfig) {
-  return babelConfig;
-};
-
-// babel config for server side
-exports.babelServer = function(babelConfig) {
-  return babelConfig;
-};
-
-// webpack config for client side
-exports.webpack = function(webpackConfig) {
-  return webpackConfig;
-};
-
-// webpack config for server side
-exports.webpackServer = function(webpackConfig) {
-  return webpackConfig;
-};
-
-exports.template = function({
-  pageName,
-  styles,
-  cssHash,
-  js,
-  initalState,
-  elementId,
-  markup,
-}) {
-  return `
-    <!DOCTYPE html>
-    <html>
-      <head>
-        <meta charset="UTF-8">
-        <meta name="pagename" content="${pageName}">
-        <link rel="icon" href="https://zos.alipayobjects.com/rmsportal/nDgBIDOgapQuIrT.ico" type="image/x-icon" />
-        <link rel="shortcut icon" href="https://zos.alipayobjects.com/rmsportal/nDgBIDOgapQuIrT.ico" type="image/x-icon" />
-        <title>${pageName}</title>
-        ${styles}
-        <script>window.__INITIAL_DATA__ = ${initalState}</script>
-      </head>
-      <body>
-        <div id="${elementId}">${markup}</div>
-      </body>
-      ${cssHash}
-      ${js}
-  `;
-};
-
+``` bash
+lerna publish
 ```
+
+如果要发布特定某个包，而不是自动检测更新的方式，可以使用`lerna publish --force-publish=package-2,package-4`
+
+## 文档
+
+请参考[docs](./docs)

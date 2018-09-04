@@ -1,0 +1,15 @@
+{
+  "name": "menreiki-plugin-webpack",
+  "version": "1.0.0",
+  "description": "menreiki的webpack配置插件",
+  "main": "./src/index.js",
+  "scripts": {
+    "lint": "../../node_modules/.bin/eslint \"./src/**/*.{js,jsx}\"",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "webpack配置"
+  ],
+  "author": "",
+  "license": "MIT"
+}

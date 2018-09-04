@@ -1,0 +1,22 @@
+{
+  "name": "menreiki-plugin-template",
+  "version": "1.0.0",
+  "description": "oc插件模板",
+  "main": "./src/index.js",
+  "scripts": {
+    "lint": "eslint \"./src/**/*.{js,jsx}\""
+  },
+  "author": "",
+  "license": "MIT",
+  "publishConfig": {
+    "registry": "http://registry.npm.alibaba-inc.com"
+  },
+  "devDependencies": {
+    "babel-eslint": "^9.0.0-beta.3",
+    "eslint": "^5.2.0",
+    "eslint-config-airbnb": "^17.0.0",
+    "eslint-plugin-import": "^2.13.0",
+    "eslint-plugin-jsx-a11y": "^6.1.1",
+    "eslint-plugin-react": "^7.10.0"
+  }
+}

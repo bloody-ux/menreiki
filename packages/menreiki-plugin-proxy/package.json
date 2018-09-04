@@ -1,0 +1,21 @@
+{
+  "name": "menreiki-plugin-proxy",
+  "version": "1.0.0",
+  "description": "menreiki开发服务器http proxy支持",
+  "main": "./src/index.js",
+  "scripts": {
+    "lint": "../../node_modules/.bin/eslint \"./src/**/*.{js,jsx}\"",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "oc代理支持"
+  ],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "chalk": "^2.4.1",
+    "http-proxy": "^1.17.0",
+    "jsonc-parser": "^2.0.1",
+    "minimatch": "^3.0.4"
+  }
+}

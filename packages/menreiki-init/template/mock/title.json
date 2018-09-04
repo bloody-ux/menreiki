@@ -1,0 +1,12 @@
+{
+  "stat": "ok",
+  "data": {
+    "title": "Title from service"
+  }
+}
+
+// {
+//   "stat": "failed",
+//   "code": "AE192929992292",
+//   "msg": "服务器维护中"
+// }

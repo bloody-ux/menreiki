@@ -1,0 +1,103 @@
+{
+  "name": "menreiki",
+  "version": "1.0.0",
+  "description": "SSR solution with react/react-router",
+  "main": "lib/core/index.js",
+  "scripts": {
+    "lint": "../../node_modules/.bin/eslint \"./lib/**/*.{js,jsx}\" \"./commands/**/*.{js,jsx}\"",
+    "prepare": "npm run lint"
+  },
+  "files": [
+    "bin",
+    "commands",
+    "lib",
+    "webpack",
+    "template",
+    "react.js",
+    "react.d.ts",
+    "router.js",
+    "router.d.ts"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/bloody-ux/menreiki.git"
+  },
+  "engines": {
+    "node": ">= 6.14.2"
+  },
+  "bin": {
+    "menreiki": "./bin/menreiki.js"
+  },
+  "bugs": {
+    "url": "https://github.com/bloody-ux/menreiki/issues"
+  },
+  "homepage": "https://github.com/bloody-ux/menreiki#readme",
+  "pre-commit": [
+    "lint-staged"
+  ],
+  "keywords": [
+    "SSR",
+    "dynamic loading"
+  ],
+  "author": "nada",
+  "license": "MIT",
+  "dependencies": {
+    "menreiki-babel-preset": "^1.0.0",
+    "menreiki-init": "^1.0.0",
+    "@babel/core": "^7.0.0",
+    "@babel/plugin-transform-runtime": "^7.0.0",
+    "@babel/polyfill": "^7.0.0",
+    "@babel/preset-env": "^7.0.0",
+    "@babel/preset-react": "^7.0.0",
+    "@babel/runtime": "^7.0.0",
+    "@types/invariant": "^2.2.29",
+    "@types/prop-types": "^15.5.5",
+    "@types/react": "^16.3.17",
+    "@types/react-router-config": "^1.0.7",
+    "@types/react-router-dom": "^4.2.7",
+    "@types/warning": "^3.0.0",
+    "autoprefixer": "^8.6.5",
+    "babel-loader": "^8.0.0",
+    "babel-plugin-dva-core-hmr": "^1.0.2",
+    "babel-plugin-import": "^1.8.0",
+    "babel-plugin-lodash": "^3.3.4",
+    "babel-plugin-path-chunk-name": "^1.1.0",
+    "chalk": "^2.4.1",
+    "commander": "^2.15.1",
+    "css-loader": "^1.0.0",
+    "detect-port": "^1.2.2",
+    "dva-core": "^1.4.0",
+    "express": "^4.16.3",
+    "file-loader": "^1.1.11",
+    "gaze": "^1.1.3",
+    "hoist-non-react-statics": "^2.5.0",
+    "invariant": "^2.2.4",
+    "json-loader": "^0.5.7",
+    "less": "^3.0.4",
+    "less-loader": "^4.1.0",
+    "mini-css-extract-plugin": "^0.4.1",
+    "nprogress": "^0.2.0",
+    "optimize-css-assets-webpack-plugin": "^5.0.0",
+    "pd-empty-module": "^1.0.3",
+    "postcss-loader": "^2.1.3",
+    "prop-types": "^15.6.1",
+    "react": "^16.3.0",
+    "react-dev-utils": "^5.0.2",
+    "react-dom": "^16.3.0",
+    "react-hot-loader": "^4.3.5",
+    "react-hot-loader-loader": "^0.0.6",
+    "react-loadable": "^5.4.0",
+    "react-redux": "^5.0.7",
+    "react-router-config": "^1.0.0-beta.4",
+    "react-router-dom": "^4.2.2",
+    "resolve": "^1.8.1",
+    "style-loader": "^0.21.0",
+    "url-loader": "^1.0.1",
+    "warning": "^3.0.0",
+    "webpack": "^4.17.1",
+    "webpack-dev-middleware": "^3.2.0",
+    "webpack-hot-middleware": "^2.22.3",
+    "url-parse": "^1.4.3",
+    "isomorphic-fetch": "^2.2.1"
+  }
+}

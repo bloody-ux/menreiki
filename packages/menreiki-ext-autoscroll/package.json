@@ -1,0 +1,19 @@
+{
+  "name": "menreiki-ext-autoscroll",
+  "version": "1.0.0",
+  "description": "menreiki在路由变更时，自动将页面滚动到头部的扩展",
+  "main": "./src/index.js",
+  "scripts": {
+    "lint": "../../node_modules/.bin/eslint \"./src/**/*.{js,jsx}\"",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "路由变更",
+    "页面位置"
+  ],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "menreiki": "^1.0.0"
+  }
+}
