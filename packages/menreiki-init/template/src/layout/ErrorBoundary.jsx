@@ -1,8 +1,5 @@
 import React, { Component } from 'menreiki/react';
-import { Page } from '@alife/frog';
-import { clue, PropTypes } from 'menreiki';
-
-const { logError } = clue;
+import { PropTypes } from 'menreiki';
 
 export default class ErrorBoundary extends Component {
   static propTypes = {
@@ -18,7 +15,7 @@ export default class ErrorBoundary extends Component {
     // Display fallback UI
     this.setState({ hasError: true });
     // You can also log the error to an error reporting service
-    logError(error);
+    // logError(error);
     console.error(error, info);
   }
 
@@ -27,10 +24,9 @@ export default class ErrorBoundary extends Component {
     const { children } = this.props;
     if (hasError) {
       return (
-        <Page.Error
-          title="系统异常"
-          description="请尽快联系客服解决问题"
-        />
+        <h2>
+          Oops, something goes wrong 
+        </h2>
       );
     }
 

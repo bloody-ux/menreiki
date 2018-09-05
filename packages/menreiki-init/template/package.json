@@ -35,8 +35,6 @@
   },
   "dependencies": {
     "menreiki": "^${menreiki}",
-    "@alife/frog": "^0.3.5",
-    "menreiki-ext-rds": "^2.0.0",
     "debug": "^3.1.0"
   },
   "engines": {
