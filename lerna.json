@@ -4,5 +4,5 @@
     "packages/*"
   ],
   "npmClient": "npm",
-  "version": "independent"
+  "version": "1.0.0-dev.1"
 }

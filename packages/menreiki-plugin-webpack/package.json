@@ -1,6 +1,6 @@
 {
   "name": "menreiki-plugin-webpack",
-  "version": "1.0.0",
+  "version": "1.0.0-dev.1",
   "description": "menreiki的webpack配置插件",
   "main": "./src/index.js",
   "scripts": {

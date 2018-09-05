@@ -1,6 +1,6 @@
 {
   "name": "menreiki-init",
-  "version": "1.0.0",
+  "version": "1.0.0-dev.1",
   "description": "用于创建menreiki项目骨架",
   "main": "./src/index.js",
   "scripts": {

@@ -1,6 +1,6 @@
 {
   "name": "menreiki-plugin-html",
-  "version": "1.0.0",
+  "version": "1.0.0-dev.1",
   "description": "menreiki的输出html的插件",
   "main": "./src/index.js",
   "scripts": {

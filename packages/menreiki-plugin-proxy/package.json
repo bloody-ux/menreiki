@@ -1,6 +1,6 @@
 {
   "name": "menreiki-plugin-proxy",
-  "version": "1.0.0",
+  "version": "1.0.0-dev.1",
   "description": "menreiki开发服务器http proxy支持",
   "main": "./src/index.js",
   "scripts": {
