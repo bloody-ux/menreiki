@@ -6,11 +6,11 @@ import ErrorBoundary from './ErrorBoundary';
 export default function DefaultLayout({ children }) {
   return (
     <div className="default-layout">
-        <NavLink to="/">Home</NavLink>
-        <NavLink to="/about">About</NavLink>
-        <NavLink to="/oldpage">Old Page</NavLink>
-        <NavLink to="/notfound">Not Found</NavLink>
-        <br />
+      <NavLink to="/">Home</NavLink>
+      <NavLink to="/about">About</NavLink>
+      <NavLink to="/oldpage">Old Page</NavLink>
+      <NavLink to="/notfound">Not Found</NavLink>
+      <br />
       <ErrorBoundary>
         {children}
       </ErrorBoundary>

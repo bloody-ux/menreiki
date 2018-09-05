@@ -25,7 +25,7 @@ export default class ErrorBoundary extends Component {
     if (hasError) {
       return (
         <h2>
-          Oops, something goes wrong 
+          Oops, something goes wrong
         </h2>
       );
     }

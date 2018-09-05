@@ -27,7 +27,6 @@ export function request(url, options = {}) {
 }
 
 export function get(url, data = {}) {
-  const { req, ...rest } = data;
   const parsedUrl = parseUrl(url);
   parsedUrl.set('query', data);
 
@@ -38,22 +37,18 @@ export function get(url, data = {}) {
     credentials: 'include',
     mode: 'cors',
     cache: 'no-cache', // 禁用缓存
-    req,
   });
 }
 
 export function post(url, data = {}) {
-  const { req, ...rest } = data;
-
   return request(url, {
-    body: JSON.stringify(rest),
+    body: JSON.stringify(data),
     method: 'POST',
     credentials: 'include',
     mode: 'cors',
     headers: {
       'Content-Type': 'application/json',
     },
-    req,
   });
 }
 
